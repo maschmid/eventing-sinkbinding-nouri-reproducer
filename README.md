@@ -1,6 +1,11 @@
 # eventing-sinkbinding-nouri-reproducer
 Attempt at reproducing a Knative Eventing SinkBinding "NoURI" issue
 
+Prerequisites:
+- knative-serving
+- knative-eventing
+- eventing-kafka (consolidated)
+
 tldr; on a fresh install, run
 
 ```
