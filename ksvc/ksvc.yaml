@@ -1,0 +1,17 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: {{ .name }}
+  namespace: {{ .namespace }}
+  labels:
+    bindings.knative.dev/include: "true"
+spec:
+  template:
+    spec:
+      containers:
+        - image: {{ .image }}
+          env:
+            - name: POD_NAME
+              value: {{ .name }}
+            - name: POD_NAMESPACE
+              value: {{ .namespace }}
