@@ -54,11 +54,6 @@ func ThingThatCausesFutureImcSinkBindingsToHangWithNoUri() *feature.Feature {
 
 	f.Setup("Delete KafkaChannel-based SinkBinding", f.DeleteResources)
 
-	/*
-	f.Setup("Wait a bit", func(ctx context.Context, t feature.T) {
-		time.Sleep(1 * time.Minute)
-	})*/
-
 	// Take two, the same thing, this time with InMemoryChannels
 	f.Setup("Create Event display ksvc", ksvc.Install(eventDisplay, eventDisplayImage))
 
@@ -94,7 +89,7 @@ func SinkBindingDoesNotHangWithNoUri() *feature.Feature {
 	f.Setup("Create InMemoryChannel", inmemorychannel.Install(channel))
 
 	f.Setup("Create SinkBinding", sinkbinding.Install(sinkBinding,
-		&duck.Destination{Ref: kafkachannel.AsRef(channel)},
+		&duck.Destination{Ref: inmemorychannel.AsRef(channel)},
 		ksvc.AsTrackerReference(sender)))
 
 	f.Setup("Create Sender Ksvc", ksvc.Install(sender, senderImage))
